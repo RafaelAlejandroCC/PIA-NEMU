@@ -1,4 +1,4 @@
-function mostrarMensajePendiente(){
+/*function mostrarMensajePendiente(){
   alert("Esta acción está preparada para conectarse al CRUD posteriormente.");
 }
 
