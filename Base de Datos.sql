@@ -3,7 +3,7 @@ USE sistema_cursos;
 CREATE TABLE usuarios (
     id_usuario INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
-    correo VARCHAR(150) NOT NULL UNIQUE,
+    email VARCHAR(150) NOT NULL UNIQUE,
     contrasena_hash VARCHAR(255) NOT NULL,
 
     rol VARCHAR(20) NOT NULL COMMENT 'Valores permitidos: alumno o maestro',
@@ -49,7 +49,7 @@ CREATE TABLE inscripciones (
 );
 INSERT INTO usuarios (
     nombre,
-    correo,
+    email,
     contrasena_hash,
     rol,
     activo,

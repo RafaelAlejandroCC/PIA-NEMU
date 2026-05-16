@@ -1,86 +1,55 @@
 document.addEventListener("DOMContentLoaded", () => {
-
-    const formulario =
-        document.getElementById("loginForm");
+    const formulario = document.getElementById("loginForm");
 
     if (!formulario) return;
 
     formulario.addEventListener("submit", (e) => {
-
         e.preventDefault();
 
-        const email =
-            document.getElementById("email")
-            .value
-            .trim();
+        const emailIngresado = document.getElementById("email").value.trim();
+        const passwordIngresada = document.getElementById("password").value;
+        const rolIngresado = document.getElementById("rol").value;
 
-        const password =
-            document.getElementById("password")
-            .value;
+        // 1. Obtener los usuarios del localStorage
+        const usuariosRegistrados = JSON.parse(localStorage.getItem("alumnos")) || [];
 
-        const rol =
-            document.getElementById("rol")
-            .value;
-
-        /*
-        OBJETO PREPARADO
-        PARA BACKEND / DATABASE
-        */
-
-        const loginData = {
-
-            email: email,
-
-            password: password,
-
-            rol: rol,
-
-            fechaLogin:
-                new Date().toISOString()
-
-        };
-
-        console.log(
-            "Datos de login:",
-            loginData
+        // 2. Buscar coincidencia usando las variables requeridas (email, password)
+        const usuarioValido = usuariosRegistrados.find(u => 
+            u.email.toLowerCase() === emailIngresado.toLowerCase() && 
+            u.password === passwordIngresada && 
+            u.rol === rolIngresado
         );
 
-        /*
-        SESIÓN TEMPORAL
-        */
+        // === CUENTAS DEMO DE AUXILIO ===
+        const cuentaDemoAdmin = (emailIngresado.toLowerCase() === "admin@nemu.com" && passwordIngresada === "12345" && rolIngresado === "maestro");
+        const cuentaDemoAlumno = (emailIngresado.toLowerCase() === "alumno@nemu.com" && passwordIngresada === "12345" && rolIngresado === "alumno");
 
-        localStorage.setItem(
-            "usuarioActual",
-            JSON.stringify(loginData)
-        );
+        // 3. Validar el acceso
+        if (usuarioValido || cuentaDemoAdmin || cuentaDemoAlumno) {
+            
+            // Usamos la variable u.nombre o el nombre por defecto
+            const nombreUsuario = usuarioValido ? usuarioValido.nombre : (rolIngresado === "maestro" ? "Profesor Maestro" : "Alumno Demo");
 
-        /*
-        REDIRECCIÓN
-        SEGÚN EL ROL
-        */
+            const loginData = {
+                nombre: nombreUsuario,
+                email: emailIngresado,
+                rol: rolIngresado,
+                fechaLogin: new Date().toISOString()
+            };
 
-        if (rol === "maestro") {
+            // Almacenar sesión activa y dar la bienvenida
+            localStorage.setItem("usuarioActual", JSON.stringify(loginData));
+            alert("¡Inicio de sesión exitoso! Bienvenido " + loginData.nombre);
 
-            window.location.href =
-                "dashboard-maestro.html";
-
-            return;
+            // 4. Redirección de rutas
+            if (rolIngresado === "maestro") {
+                window.location.href = "dashboard-maestro.html";
+            } else if (rolIngresado === "alumno") {
+                window.location.href = "dashboard-alumno.html";
+            }
+            
+        } else {
+            alert("Error: Las credenciales son incorrectas, la contraseña no coincide o el rol es inválido.");
         }
-
-        if (rol === "alumno") {
-
-            window.location.href =
-                "dashboard-alumno.html";
-
-            return;
-        }
-
-        /*
-        SEGURIDAD EXTRA
-        */
-
-        alert("Rol inválido");
-
     });
-
 });

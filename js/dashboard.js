@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         bienvenidaMaestro.textContent =
             "Bienvenido, " +
-            (usuario.nombre || usuario.email);
+            (usuario.nombre || usuario.email ) ;
 
     }
 
