@@ -1,4 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
+    
+    // Borra la sesión anterior inmediatamente al cargar el login para evitar bloqueos
+    localStorage.removeItem("usuarioActual");
+
     const formulario = document.getElementById("loginForm");
 
     if (!formulario) return;
