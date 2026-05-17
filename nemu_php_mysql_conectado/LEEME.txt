@@ -1,4 +1,12 @@
-# Nemu conectado con PHP y MySQL
+# PIA-NEMU
+PIA para el laboratorio de Programacion WEB
+
+Integrandes
+-Rafael Alejandro Cornelio Cañamar - 1900318
+-Nestor Antonio Santiago Bautista - 2101761
+-Isaac García Ruiz - 2094465
+
+Para la instalacion
 
 ## 1. Dónde poner la carpeta
 
@@ -71,7 +79,8 @@ contraseña: 12345
 rol: alumno
 ```
 
-## 6. Qué se corrigió
+Nota entre los colaboradores
+Qué se corrigió
 
 - Se cambió el JS para que ya no dependa de `localStorage` para guardar datos.
 - Se agregaron endpoints PHP para usuarios, cursos, inscripciones, login, registro y dashboard.
