@@ -1,0 +1,100 @@
+# PIA-NEMU
+PIA para el laboratorio de Programacion WEB
+
+Integrandes
+-Rafael Alejandro Cornelio Cañamar - 1900318
+-Nestor Antonio Santiago Bautista - 2101761
+-Isaac García Ruiz - 2094465
+
+Para la instalacion
+
+## 1. Dónde poner la carpeta
+
+Copia la carpeta `nemu_php_mysql_conectado` dentro de:
+
+```txt
+C:\xampp\htdocs\
+```
+
+La ruta final debe quedar así:
+
+```txt
+C:\xampp\htdocs\nemu_php_mysql_conectado\
+```
+
+## 2. Importar la base de datos
+
+1. Abre XAMPP.
+2. Activa Apache y MySQL.
+3. Entra a phpMyAdmin.
+4. Ve a Importar.
+5. Selecciona este archivo:
+
+```txt
+sql/base_de_datos_nemu_corregida.sql
+```
+
+6. Presiona Continuar.
+
+## 3. Revisar conexión
+
+El archivo de conexión está aquí:
+
+```txt
+config/conexion.php
+```
+
+Por defecto está configurado así:
+
+```php
+$host = "localhost";
+$usuario = "root";
+$password = "";
+$base_datos = "nemu_";
+```
+
+## 4. Abrir el sistema
+
+En el navegador abre:
+
+```txt
+http://localhost/nemu_php_mysql_conectado/
+```
+
+## 5. Usuarios de prueba
+
+Maestro:
+
+```txt
+correo: admin@nemu.com
+contraseña: 12345
+rol: maestro
+```
+
+Alumno:
+
+```txt
+correo: alumno@nemu.com
+contraseña: 12345
+rol: alumno
+```
+
+Nota entre los colaboradores
+Qué se corrigió
+
+- Se cambió el JS para que ya no dependa de `localStorage` para guardar datos.
+- Se agregaron endpoints PHP para usuarios, cursos, inscripciones, login, registro y dashboard.
+- Se corrigió la base de datos para que `cursos` use `id_maestro`, como lo necesita el PHP.
+- Se agregó `password_hash()` y `password_verify()` para contraseñas.
+- Se corrigieron varias rutas de CSS y JS.
+
+
+NOTA CSS:
+El archivo de estilos se encuentra en:
+css/styles.css
+
+Todas las páginas HTML dentro de la carpeta html/ apuntan a:
+../css/styles.css
+
+El index.html principal apunta a:
+css/styles.css
